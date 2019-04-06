@@ -28,6 +28,7 @@
 
 <!-- Container for the visualization -->
 <div id="chart1"></div>
+<div id="chart2"></div>
 
 <script>
     //initiate renderer, use it for all vega-embed.
@@ -48,6 +49,41 @@
     };
 
     vegaEmbed('#chart1',c1,opt);
+
+    //chart 2
+
+    var c2={
+      "$schema": 'https://vega.github.io/schema/vega-lite/v2.json',
+      "data":{"url": "data/csvjson.json"},
+      "width": 600,
+      "height": 400,
+      "mark": {
+        "type": "circle",
+        "opacity": 0.8,
+        "stroke": "black",
+        "strokeWidth": 1
+      },
+      "encoding":{
+        "x": {
+          "field": "YEAR(2)",
+          "type": "ordinal",
+          "axis": {"labelAngle": 0}
+        },
+        "y": {
+          "field": "METHOD OF LEAK",
+          "type": "nominal",
+          "axis": {"title": ""}},
+        "size": {
+          "field": "records lost",
+          "type": "quantitative",
+          "legend": {"title": "Number of Records Lost", "clipHeight": 30},
+          "scale": {"range": [0, 10000]}
+        },
+         "color": {"field": "METHOD OF LEAK", "type": "nominal", "legend": null}
+      }
+    };
+
+    vegaEmbed('#chart2',c2,opt);
 
 </script>
 </body>
