@@ -80,14 +80,13 @@
           "legend": {"title": "Number of Records Lost", "clipHeight": 30},
           "scale": {"range": [0, 10000]}
         },
-         "color": {"field": "METHOD OF LEAK", "type": "nominal", "legend": null},
+         "color": {"field": "DATA SENSITIVITY", "type": "ordinal", "scale": {"scheme": "reds"} },
          'tooltip':[{"field": "Entity", "type": "nominal",},
                     {"field": "story", "type": "nominal"}]
       }
     };
 
     vegaEmbed('#chart2',c2,opt);
-
 </script>
 </body>
 </html>
