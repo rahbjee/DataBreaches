@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<head>
+    <title>Vega Lite Data Breaches Project </title>
+    <meta charset="utf-8">
+
+
+    <script src="https://cdn.jsdelivr.net/npm/vega@3"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vega-lite@2"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vega-embed@3"></script>
+
+    <!--uncomment if you decide to use advanced tooltips-->
+    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/vega-tooltip/0.4.4/vega-tooltip.js"></script>
+    <link rel="stylesheet" type="text/css"
+          href="https://cdnjs.cloudflare.com/ajax/libs/vega-tooltip/0.4.4/vega-tooltip.css"> -->
+
+    <!--d3 and jquery might be helpful if you want to load data only once-->
+    <script src="https://d3js.org/d3.v4.min.js"></script>
+    <script type="text/javascript" src="http://code.jquery.com/jquery-latest.min.js"></script>
+    <style media="screen">
+        /* Add space between Vega-Embed links  */
+        .vega-actions a {
+            margin-right: 5px;
+        }
+    </style>
+</head>
+
+<body>
+
+<!-- Container for the visualization -->
+<div id="chart1"></div>
+<div id="chart2"></div>
+
+<script>
+    //initiate renderer, use it for all vega-embed.
+    var opt = {"renderer": "svg", mode: "vega-lite"};
+    var width = 600;
+
+    //chart 1
+
+    var c1={
+      "$schema": 'https://vega.github.io/schema/vega-lite/v2.json',
+      "data":{"url": "data/csvjson.json"},
+      "width": width,
+      "mark":"bar",
+      "encoding":{
+        "x":{"field": "YEAR(2)", "type": "ordinal"},
+        "y":{"field": "records lost","type": "quantitative"}
+      }
+    };
+
+    vegaEmbed('#chart1',c1,opt);
+
+    //chart 2
+
+    var c2={
+      "$schema": 'https://vega.github.io/schema/vega-lite/v2.json',
+      "data":{"url": "data/csvjson.json"},
+      "width": 600,
+      "height": 400,
+      "mark": {
+        "type": "circle",
+        "opacity": 0.8,
+        "stroke": "black",
+        "strokeWidth": 1,
+        // 'tooltip':{"fiels": "data"}
+      },
+      "encoding":{
+        "x": {
+          "field": "YEAR(2)",
+          "type": "ordinal",
+          "axis": {"labelAngle": 0}
+        },
+        "y": {
+          "field": "METHOD OF LEAK",
+          "type": "nominal",
+          "axis": {"title": ""}},
+        "size": {
+          "field": "records lost",
+          "type": "quantitative",
+          "legend": {"title": "Number of Records Lost", "clipHeight": 30},
+          "scale": {"range": [0, 10000]}
+        },
+         "color": {"field": "METHOD OF LEAK", "type": "nominal", "legend": null},
+         'tooltip':[{"field": "Entity", "type": "nominal",},
+                    {"field": "story", "type": "nominal"}]
+      }
+    };
+
+    vegaEmbed('#chart2',c2,opt);
+
+</script>
+</body>
+</html>
