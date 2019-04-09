@@ -1,5 +1,5 @@
-#h1 Welcome to our interactive visualization of recent data breaches.  
-#h5 This project was developed as part of SI 649: Information Visualization
+# Welcome to our interactive visualization of recent data breaches.  
+##### This project was developed as part of SI 649: Information Visualization
 
 Our data comes from informationisbeautiful.net which maintains this spreadsheet: http://bit.ly/bigdatabreaches
 
