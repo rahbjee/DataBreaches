@@ -8,6 +8,6 @@ Currently our visualization is built using Vega-Lite and we were able to accompl
 We also constructed a timeline of various policies pertaining to data security & plan display the various stages of passing of these laws as annotations on our final graph.  Additionally, we would like to incorporate a drop-down menu that will allow the audience to filter the data breaches by industry.  A mock-up of this is shown in our previous Tableau version (PNG image included in zip file).  
 
 You must run a http.server in order to see the interactive graphs produced by Vega-Lite.  In order to do this navigate to your directory in the console & run the following python3 command:
-'''
+```
 python -m http.server
-'''
+```
