@@ -1,0 +1,35 @@
+* There is a current bill (href="http://www.mondaq.com/unitedstates/x/779554/Data+Protection+Privacy/Privacy+What+You+Should+Know+About+New+Laws") in motion to create a nation-wide law requiring notification of a data security-breach -- it would be the first national law of its kind in the United States if enacted. 
+* In 2017 a similar bill (href="https://www.congress.gov/bill/115th-congress/house-bill/3806/text") was introduced to the House floor, but did not continue through the law-making process. 
+* The first law requiring notification of a data breach to those who were affected was enacted in California in 2002, and required entities operating out of California to disclose such breaches. Notification could only be delayed in the event it would impede an open criminal investigation. 
+* Since then, nearly 50 states have adopted similar laws. 
+* The National Conference of State Legislatures has advocated for states to take stronger precautions against such breaches given the lack of national oversight and accountability. 
+* In September, 2016, the Federal Trade Commission created a webpage and a report that offers advice to businesses in case of a data breach.
+* Timeline of changes in the policy-realm: -- see google sheet (href="https://docs.google.com/spreadsheets/d/1UE3cVrcJBV1gPkI8snMEAaf2gIehx_DHUDB08TkmgFk/edit?usp=sharing")
+   * 2002
+      * CA: the first state to sign a law
+   * 2003
+   * 2004
+   * 2005
+      * 20 states sign laws
+   * 2006
+      * 12 more states sign laws
+   * 2007
+   * 2008
+   * 2009
+   * 2010
+      * 45 states total have signed laws by this point
+   * 2011
+   * 2012
+   * 2013
+      * 7 states update laws or pass newer, more rigorous laws
+   * 2014
+   * 2015
+      * 10 states update laws or pass newer, more rigorous laws
+   * 2016
+      * FTC creates a guide of how businesses should react when a data breach happens (unenforceable)
+   * 2017
+      * HR 3806 is introduced to the House
+   * 2018
+      * Alabama and South Dakota are the last two states to sign laws
+   * 2019
+      * Bill introduced to House
