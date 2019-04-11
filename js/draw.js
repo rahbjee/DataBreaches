@@ -9,6 +9,7 @@ function loadData() {
         data = d;
         data.forEach((item) =>{
           item.YEA = parseInt(item.YEA);
+          item.num_stolen = parseInt(item.num_stolen)
         });
     drawChartOne(data);
     });
@@ -44,12 +45,16 @@ function drawChartOne(dataitems){
   var simulation = d3.forceSimulation(dataitems)
   .force("x", d3.forceX(function(d){return x(d.YEA);}).strength(1))
   .force("y", d3.forceY(height/2))
-  .force("collide", d3.forceCollide(4))
+  .force("collide", d3.forceCollide(function(d,i){
+    // console.log(d,i)
+    return 3//(d.num_stolen/10000000)
+  }))
   .stop();
 
   for (var i = 0; i < 120; ++i) simulation.tick();
-  var cell = g.append("g")
+  var cell = svg.append("g")
   .attr("class", "cells")
+  .attr("transform", "translate(25,0)")
   .selectAll("g").data(d3.voronoi()
   .extent([[-margin.left, -margin.top], [width + margin.right, height + margin.top]])
   .x(function(d) { return d.x; })
@@ -57,20 +62,32 @@ function drawChartOne(dataitems){
   .polygons(data)).enter().append("g");
 
 
+  cell.append("circle")
+      .attr("r", function(d){return (d.data.num_stolen/10000000)})
+      .attr("sensitivity", function(d){return d.data.SENSITIVITY})
+      .attr("story", function(d){return d.data.story})
+      .attr("cx", function(d) { return d.data.x; })
+      .attr("cy", function(d) { return d.data.y; });
+
+  cell.append("path")
+      .attr("d", function(d) { return "M" + d.join("L") + "Z"; });
+
+  // cell.append("title")
+  //     .text(function(d) { return d.data.id + "\n" + formatValue(d.data.value); });
+
 }
 
+//
+//
+//
+//   g.append("g")
+//       .attr("class", "axis axis--x")
+//       .attr("transform", "translate(0," + height + ")")
+//       .call(d3.axisBottom(x).ticks(20, ".0s"));
+//
 
 //
-//   cell.append("circle")
-//       .attr("r", 3)
-//       .attr("cx", function(d) { return d.data.x; })
-//       .attr("cy", function(d) { return d.data.y; });
-//
-//   cell.append("path")
-//       .attr("d", function(d) { return "M" + d.join("L") + "Z"; });
-//
-//   cell.append("title")
-//       .text(function(d) { return d.data.id + "\n" + formatValue(d.data.value); });
+
 // });
 //
 // function type(d) {
