@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<head>
+    <title>Vega Data Breaches Project </title>
+    <meta charset="utf-8">
+
+    <script src="http://vega.github.io/vega-editor/vendor/d3.min.js" charset="utf-8"></script>
+    <script src="http://vega.github.io/vega-editor/vendor/vega.js" charset="utf-8"></script>
+    <script src="http://vega.github.io/vega-editor/vendor/vega-embed.js" charset="utf-8"></script>
+    <script type="text/javascript" src="http://code.jquery.com/jquery-latest.min.js"></script>
+    <!-- <script src="https://cdn.jsdelivr.net/npm/vega-embed@3"></script> -->
+
+
+  </head>
+
+  <body>
+  <div id="chart3"></div>
+
+  <script>
+      //initiate renderer, use it for all vega-embed.
+      var opt = {"renderer": "svg", mode: "vega-lite"};
+      var width = 600;
+      var c3={
+      "$schema": "https://vega.github.io/schema/vega/v5.json",
+      "data":[{
+        "name":"breach",
+        "url": "data/csvjson.json",
+        "format":{'type':'json', 'property':'nodes'}
+      }],
+      "width": 800,
+      "height":100,
+      "padding": {"left": 5, "right": 5, "top": 0, "bottom": 20},
+      "autosize": "none",
+
+     "signals": [
+       { "name": "cx", "update": "width / 2" },
+       { "name": "cy", "update": "height / 2" },
+       { "name": "radius", "value": 8, "bind": {"input": "range", "min": 2, "max": 15, "step": 1} },
+       { "name": "collide", "value": 1, "bind": {"input": "range", "min": 1, "max": 10, "step": 1} },
+       { "name": "gravityX", "value": 0.2, "bind": {"input": "range", "min": 0, "max": 1} },
+       { "name": "gravityY", "value": 0.1, "bind": {"input": "range", "min": 0, "max": 1} },
+       { "name": "static", "value": true, "bind": {"input": "checkbox"} }
+     ],
+     "data": [
+       {
+         "name": "breach",
+         "url": "data/csvjson.json",
+         "format": {"type": "json", "property": "nodes"}
+       }
+     ],
+     "scales": [
+      {
+        "name": "xscale",
+        "type": "band",
+        "domain": {
+          "data": "breach",
+          "field": "YEAR(2)",
+          "sort": true
+        },
+        "range": "width"
+      },
+        {
+        "name": "color",
+        "type": "ordinal",
+        "domain": {"data": "breach", "field": "YEAR(2)"},
+        "range": {"scheme": "category20c"}
+      }
+    ],
+    "axes": [
+    { "orient": "bottom", "scale": "xscale" }
+  ],
+  "marks": [
+    {
+      "name": "nodes",
+      "type": "symbol",
+      "from": {"data": "breach"},
+      "encode": {
+        "enter": {
+          "fill": {"scale": "color", "field": "YEAR(2)"},
+          "xfocus": {"scale": "xscale", "field": "YEAR(2)", "band": 0.5},
+          "yfocus": {"signal": "cy"}
+        },
+        "update": {
+          "size": {"signal": "pow(2 * radius, 2)"},
+          "stroke": {"value": "white"},
+          "strokeWidth": {"value": 1},
+          "zindex": {"value": 0}
+        },
+        "hover": {
+          "stroke": {"value": "purple"},
+          "strokeWidth": {"value": 3},
+          "zindex": {"value": 1}
+        }
+      },
+      "transform": [
+        {
+          "type": "force",
+          "iterations": 300,
+          "static": {"signal": "static"},
+          "forces": [
+            {"force": "collide", "iterations": {"signal": "collide"}, "radius": {"signal": "radius"}},
+            {"force": "x", "x": "xfocus", "strength": {"signal": "gravityX"}},
+            {"force": "y", "y": "yfocus", "strength": {"signal": "gravityY"}}
+          ]
+        }
+      ]
+     }
+   ]
+   };
+
+      vg.embed('#chart3',c3);
+    </script>
+    </body>
+    </html>
